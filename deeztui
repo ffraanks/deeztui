@@ -80,6 +80,7 @@ EOF
                   printf "Cole o link da música abaxio:\n\n"
                   read MUSIC_LINK
                   deezgo get -f mp3 "$MUSIC_LINK"
+                  read -p 'Downlaod finalizado PRESS ENTER TO CONTINUE...'
             elif [ $CHOICE == '2' ] || [ $CHOICE == '02' ] ; then
                   clear
                   printf "Digite o PATH que deseja baixar a música (Ex: /home/user/Music)\n\n"
