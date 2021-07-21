@@ -105,10 +105,10 @@ EOF
       elif [ $OPTIONS == '5' ] || [ $OPTIONS == '05' ] ; then
             clear
             printf "Escolha uma das opções:\n\n"
-            printf "[1] - Pesquisar albuns\n"
-            printf "[2] - Pesquisar músicas\n"
+            printf "[1] - Pesquisar Albuns\n"
+            printf "[2] - Pesquisar Músicas\n"
             printf "[3] - Pesquisar Artistas\n"
-            printf "[4] - Pesquisar música com FZF\n\n"
+            printf "[4] - Pesquisar Música com FZF\n\n"
             read SEARCH
             if [ $SEARCH == '1' ] || [ $SEARCH == '01' ] ; then
                   clear
