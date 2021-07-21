@@ -1,0 +1,169 @@
+#!/bin/env bash
+while true ; do
+
+      # clear to screen
+      clear
+      cat << EOF
+# Projeto original: https://gitlab.com/heyitscassio/deezgo
+
+# Criador(a) do projeto: Cassio
+
+# Criador(a) do script : Franklin Souza
+
+# Github: https://github.com/ffraanks
+
+# Esse script foi base do Deezgo um projeto escrito em Go para poder baixar música do Deezer via terminal Linux, reescrevi em shell para o uso de usuarios novatos, para mais informações acesse o projeto original, e por favor leia o script antes de executa-lo.
+
+EOF
+
+      printf "
+██████╗ ███████╗███████╗███████╗████████╗██╗   ██╗██╗
+██╔══██╗██╔════╝██╔════╝╚══███╔╝╚══██╔══╝██║   ██║██║
+██║  ██║█████╗  █████╗    ███╔╝    ██║   ██║   ██║██║
+██║  ██║██╔══╝  ██╔══╝   ███╔╝     ██║   ██║   ██║██║
+██████╔╝███████╗███████╗███████╗   ██║   ╚██████╔╝██║
+╚═════╝ ╚══════╝╚══════╝╚══════╝   ╚═╝    ╚═════╝ ╚═╝
+                                                  \n\n"
+      printf "Escolha uma das opções abaxio:\n\n"
+      printf "[1] - Baixar e instalar o Deezgo\n"
+      printf "[2] - Configurar ARL e PATH\n"
+      printf "[3] - Baixar músicas\n"
+      printf "[4] - Baixar albúm\n"
+      printf "[5] - Pesquisar\n"
+      printf "[6] - Remover Música/Albúm\n\n"
+      printf "Ctrl+C para sair\n\n"
+      read OPTIONS
+
+      # Condicionais
+
+      if [ $OPTIONS == '1' ] || [ $OPTIONS == '01' ] ; then
+            clear
+            printf "Digite sua senha sudo para poder baixar o go primeiro e assim baixar o Deezgo:\n\n"
+            sudo pacman -S go --noconfirm && go get gitlab.com/heyitscassio/deezgo && cd go/bin && sudo cp deezgo /usr/bin && read -p 'PRESS ENTER TO CONTINUE...'
+            clear
+            printf "Deseja baixar e instalar o FZF (RECOMENDADO)?:\n\n"
+            printf "[1] - Sim\n"
+            printf "[2] - Não\n\n"
+            read FZF_INSTALL
+            
+            if [ $FZF_INSTALL == 's' ] || [ $FZF_INSTALL == 'S' ] || [ $FZF_INSTALL == 'sim' ] || [ $FZF_INSTALL == 'Sim' ] || [ $FZF_INSTALL == 'SIM' ] || [ $FZF_INSTALL == '1' ] || [ $FZF_INSTALL == '01' ] ; then
+                  clear && sudo pacman -S fzf --noconfirm && read -p 'PRESS ENTER TO CONTINUE...'
+            
+            elif [ $FZF_INSTALL == 'n' ] || [ $FZF_INSTALL == 'N' ] || [ $FZF_INSTALL == 'nao' ] || [ $FZF_INSTALL == 'NAO' ] || [ $FZF_INSTALL == 'não' ] || [ $FZF_INSTALL == 'Não' ] || [ $FZF_INSTALL == 'Nao' ] || [ $FZF_INSTALL == 'NÃO'] || [ $FZF_INSTALL == '2' ] || [ $FZF_INSTALL == '02' ] ; then
+                  clear && continue
+            fi
+
+      elif [ $OPTIONS == '2' ] || [ $OPTIONS == '02' ] ; then
+            clear
+            printf "Para saber sobre ARL abra esse link: https://deezloader.net/how-to-use-deezloader/\n\n"
+            printf "Copia essa config e cole no seu $HOME/.config/deezgo/config.json:\n\n"
+            cat << EOF
+{
+"arl": "your arl here",
+"defaultpath": "."
+}
+
+EOF
+            read -p 'PREES ENTER TO CONTINUE...'
+
+            mkdir $HOME/.config/deezgo && touch $HOME/.config/deezgo/config.json
+            $EDITOR $HOME/.config/deezgo/config.json
+
+      elif [ $OPTIONS == '3' ] || [ $OPTIONS == '03' ] ; then
+            clear
+            printf "Escolha uma das opções:\n\n"
+            printf "[1] - Baixar música no PATH atual\n"
+            printf "[2] - Baixar música no DIR especifico\n\n"
+            read CHOICE
+            if [ $CHOICE == '1' ] || [ $CHOICE == '01' ] ; then
+                  clear
+                  printf "Cole o link da música abaxio:\n\n"
+                  read MUSIC_LINK
+                  deezgo get -f mp3 "$MUSIC_LINK"
+            elif [ $CHOICE == '2' ] || [ $CHOICE == '02' ] ; then
+                  clear
+                  printf "Digite o PATH que deseja baixar a música (Ex: /home/user/Music)\n\n"
+                  read PATH_MUSIC
+                  printf "\nAgora cole o link da música abaixo:\n\n"
+                  read MUSIC_LINK1
+                  deezgo get -f mp3 -p "$PATH_MUSIC" "$MUSIC_LINK1"
+            else
+                  read -p 'Opção INVALIDA - PRESS ENTER TO CONTINUE...'
+            fi
+
+      elif [ $OPTIONS == '4' ] || [ $OPTIONS == '04' ] ; then
+            clear
+            printf "Digite o PATH que deseja baixar o albúm:\n\n"
+            read ALBUM_PATH
+            printf "\nAgora cole o link do album abaixo:\n\n"
+            read ALBUM_LINK
+            deezgo get -f mp3 -p "$ALBUM_PATH" "$ALBUM_LINK"
+
+      elif [ $OPTIONS == '5' ] || [ $OPTIONS == '05' ] ; then
+            clear
+            printf "Escolha uma das opções:\n\n"
+            printf "[1] - Pesquisar albuns\n"
+            printf "[2] - Pesquisar músicas\n"
+            printf "[3] - Pesquisar Artistas\n"
+            printf "[4] - Pesquisar música com FZF\n\n"
+            read SEARCH
+            if [ $SEARCH == '1' ] || [ $SEARCH == '01' ] ; then
+                  clear
+                  printf "Digite o nome do album logo abaixo:\n\n"
+                  read ALBUM_NAME
+                  deezgo search -a "$ALBUM_NAME"
+                  read -p 'PRESS ENTER TO CONTINUE'
+      
+            elif [ $SEARCH == '2' ] || [ $SEARCH == '02' ] ; then
+                  clear
+                  printf "Digite o nome da música logo abaixo:\n\n"
+                  read MUSIC_NAME
+                  deezgo search -t "$MUSIC_NAME"
+                  read -p 'PRESS ENTER TO CONTINUE...'
+      
+            elif [ $SEARCH == '3' ] || [ $SEARCH == '03' ] ; then
+                  clear
+                  printf "Digite o nome do artista logo abaixo:\n\n"
+                  read -p 'PRESS ENTER TO CONTINUE...'
+                  clear
+                  read ARTIST_NAME
+                  deezgo search -A "$ARTIST_NAME"
+                  read -p 'PRESS ENTER TO CONTINUE...'
+      
+            elif [ $SEARCH == '4' ] || [ $SEARCH == '04' ] ; then
+                  clear
+                  printf "Digite o nome da música logo abaixo:\n\n"
+                  read MUSIC_NAME1
+                  printf "\nAgora digite o PATH aonder quer baixar a música:\n\n"
+                  read PATH_MUSIC1
+                  deezgo search -t "$MUSIC_NAME1" | fzf | awk '{print $NF}' | xargs -r deezgo get -p "$PATH_MUSIC1"
+            else
+                  read -p 'Opção INVALIDA - PRESS ENTER TO CONTINUE...'
+            fi
+
+      elif [ $OPTIONS == '6' ] || [ $OPTIONS == '06' ] ; then
+            clear
+            printf "Escolha uma das opções abaixo:\n\n"
+            printf "[1] - Apagar Músicas/Albuns (Mais de um)\n"
+            printf "[2] - Apagar tudo de uma só vez\n\n"
+            read DELETE_OPTION
+            
+            if [ $DELETE_OPTION == '1' ] || [ $DELETE_OPTION == '01' ] ; then
+                  clear
+                  printf "Digite seu PATH onde se localiza música/album:\n\n"
+                  read MUSIC_ALBUM
+                  cd "$MUSIC_ALBUM" && ls
+                  printf "Digite o nome da música/album que deseja apagar:\n\n"
+                  read MUSIC_ALBUM_DELETE
+                  rm -rf "MUSIC_ALBUM_DELETE"
+            elif [ $DELETE_OPTION == '2' ] || [ $DELETE_OPTION == '02' ] ; then
+                  clear
+                  printf "Digite o PATH onde se localiza música/album:\n\n"
+                  read MUSIC_ALBUM1
+                  cd "$MUSIC_ALBUM1" && rm -rf *
+            fi
+            
+      else
+            read -p 'Opção INVALIDA -  PRESS ENTER TO CONTINUE...'
+      fi
+done
