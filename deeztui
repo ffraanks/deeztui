@@ -87,6 +87,7 @@ EOF
                   printf "\nAgora cole o link da música abaixo:\n\n"
                   read MUSIC_LINK1
                   deezgo get -f mp3 -p "$PATH_MUSIC" "$MUSIC_LINK1"
+                  read -p 'Download finalizado PRESS ENTER TO CONTINUE...'
             else
                   read -p 'Opção INVALIDA - PRESS ENTER TO CONTINUE...'
             fi
@@ -98,6 +99,7 @@ EOF
             printf "\nAgora cole o link do album abaixo:\n\n"
             read ALBUM_LINK
             deezgo get -f mp3 -p "$ALBUM_PATH" "$ALBUM_LINK"
+            read -p 'Download finalizado PRESS ENTER TO CONTINUE...'
 
       elif [ $OPTIONS == '5' ] || [ $OPTIONS == '05' ] ; then
             clear
@@ -156,11 +158,13 @@ EOF
                   printf "Digite o nome da música/album que deseja apagar:\n\n"
                   read MUSIC_ALBUM_DELETE
                   rm -rf "MUSIC_ALBUM_DELETE"
+                  read -p 'PRESS ENTER TO CONTINUE...'
             elif [ $DELETE_OPTION == '2' ] || [ $DELETE_OPTION == '02' ] ; then
                   clear
                   printf "Digite o PATH onde se localiza música/album:\n\n"
                   read MUSIC_ALBUM1
                   cd "$MUSIC_ALBUM1" && rm -rf *
+                  read -p 'Tudo removido PRESS ENTER TO CONTINUE...'
             fi
             
       else
