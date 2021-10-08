@@ -87,7 +87,7 @@ EOF
                   read PATH_MUSIC
                   printf "\nAgora cole o link da música abaixo:\n\n"
                   read MUSIC_LINK1
-                  deezgo get -f mp3 -p "$PATH_MUSIC" "$MUSIC_LINK1"
+                  deezgo get -f mp3128 -p "$PATH_MUSIC" "$MUSIC_LINK1"
                   read -p 'Download finalizado PRESS ENTER TO CONTINUE...'
             else
                   read -p 'Opção INVALIDA - PRESS ENTER TO CONTINUE...'
