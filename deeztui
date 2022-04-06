@@ -1,4 +1,5 @@
-#!/bin/env bash
+#!/usr/bin/env bash
+cd $HOME
 while true ; do
 
       # clear to screen
@@ -40,9 +41,8 @@ EOF
             clear
             printf "Digite sua senha sudo para poder baixar o go primeiro e assim baixar o Deezgo:\n\n"
             sudo pacman -S go --noconfirm
-            go install gitlab.com/heyitscassio/deezgo@latest && cd $HOME/go/bin
+            go install gitlab.com/heyitscassio/deezgo@latest && cd go/bin
             sudo cp deezgo /usr/bin
-            cd $HOME
             mv go .go
             read -p 'PRESS ENTER TO CONTINUE...'
             clear
