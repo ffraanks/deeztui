@@ -4,8 +4,10 @@ O DeezTUI é um script bash baseado no [Deezgo](https://gitlab.com/heyitscassio/
 
 ## Baixar, instalar e usar:
 
+- Entre no seu PATH e execute esse comando:
+
 ```
-cd $HOME/.local/bin && wget -c "https://github.com/ffraanks/deeztui/raw/master/deeztui" && chmod +x deeztui && ./deeztui
+wget -c "https://github.com/ffraanks/deeztui/raw/master/deeztui" && chmod +x deeztui && ./deeztui
 ```
 
 ### DeezTUI:
